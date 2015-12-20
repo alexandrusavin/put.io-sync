@@ -1,10 +1,9 @@
 #!/usr/bin/env node
 
-"use strict";
+'use strict';
+
 var path = require('path');
-var fs = require('fs');
 var _ = require('underscore');
-var lib = path.join(path.dirname(fs.realpathSync(__filename)), '../lib');
 var nopt = require("nopt")
     , noptUsage = require("nopt-usage")
     , Stream = require("stream").Stream
@@ -42,15 +41,15 @@ var nopt = require("nopt")
         "quiet" : false
     }
     , parsed = nopt(knownOpts, shortHands)
-    , usage = noptUsage(knownOpts, shortHands, description, defaults)
+    , usage = noptUsage(knownOpts, shortHands, description, defaults);
 
 if (parsed.help) {
-    console.log('Usage: ')
-    console.log(usage)
+    console.log('Usage: ');
+    console.log(usage);
     process.exit(0);
 }
 
-var PutIOSync = require(lib + '/putio-sync.js')
+var PutIOSync = require('../lib/putio-sync.js');
 
 var sync = new PutIOSync(_.extend(defaults, parsed));
 sync.startSync();
